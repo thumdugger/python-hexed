@@ -12,12 +12,12 @@ Why does this file exist, and why not put this in __main__?
   - When you import __main__ it will get executed again (as a module) because
     there's no ``hexed.__main__`` in ``sys.modules``.
 
-  Also see (1) from http://click.pocoo.org/5/setuptools/#setuptools-integration
+  Also see (1) from https://click.palletsprojects.com/en/8.0.x/setuptools/
 """
 import click
 
 
 @click.command()
-@click.argument('names', nargs=-1)
+@click.argument("names", nargs=-1)
 def main(names):
     click.echo(repr(names))
