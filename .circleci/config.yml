@@ -31,7 +31,7 @@ jobs:
           name: "run tox tests"
           command: |
             . venv/bin/activate
-            tox -ve py38
+            tox -ve clean,check,docs,py38,report
 
   build-py39:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
@@ -59,7 +59,7 @@ jobs:
           name: "run tox tests"
           command: |
             . venv/bin/activate
-            tox -ve py39
+            tox -ve clean,check,docs,py39,report
 
   build-py310:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
@@ -87,7 +87,7 @@ jobs:
           name: "run tox tests"
           command: |
             . venv/bin/activate
-            tox -ve py310
+            tox -ve clean,check,docs,py310,report
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
