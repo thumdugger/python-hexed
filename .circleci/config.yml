@@ -5,7 +5,7 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  build:
+  build-py38:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
@@ -31,11 +31,69 @@ jobs:
           name: "run tox tests"
           command: |
             . venv/bin/activate
-            tox
+            tox -ve py38
+
+  build-py39:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    docker:
+      - image: cimg/python:3.9
+
+    working_directory: ~/repo
+
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    steps:
+      # Step 1: obtain repo from github
+      - checkout
+      # Step 2: install dependencies into virtual environment
+      - run:
+          name: "install dependencies"
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install --upgrade pip
+            pip install -r requirements.txt
+      # Step 3: run tests
+      - run:
+          name: "run tox tests"
+          command: |
+            . venv/bin/activate
+            tox -ve py39
+
+  build-py310:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    docker:
+      - image: cimg/python:3.10
+
+    working_directory: ~/repo
+
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    steps:
+      # Step 1: obtain repo from github
+      - checkout
+      # Step 2: install dependencies into virtual environment
+      - run:
+          name: "install dependencies"
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install --upgrade pip
+            pip install -r requirements.txt
+      # Step 3: run tests
+      - run:
+          name: "run tox tests"
+          command: |
+            . venv/bin/activate
+            tox -ve py310
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   build-workflow:
     jobs:
-      - build
+      - build-py38
+      - build-py39
+      - build-py310
