@@ -5,6 +5,8 @@ Changelog
 0.0.1 (2022-01-26)
 ------------------
 
+* Bumped version (or tried to ... we'll see if it worked) to v0.0.1
+
 * Added ``hexed --version`` command line option
     * Versioning now based on setuptools-scm integration
 
