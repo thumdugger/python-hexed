@@ -19,5 +19,6 @@ import click
 
 @click.command()
 @click.argument("names", nargs=-1)
+@click.version_option()
 def main(names):
     click.echo(repr(names))

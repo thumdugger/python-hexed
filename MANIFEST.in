@@ -19,4 +19,4 @@ include requirements.txt
 include .circleci/config.yml
 
 
-global-exclude *.py[cod] __pycache__/* *.so *.dylib
+global-exclude *.py[cod] __pycache__/* *.so *.dylib _version.py
